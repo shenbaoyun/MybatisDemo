@@ -11,6 +11,8 @@
     <modules>
         <module>mybatis_demo01</module>
         <module>mybatis_demo2</module>
+        <module>mybatis_demo3</module>
+        <module>mybatis_demo4</module>
     </modules>
 
     <properties>
