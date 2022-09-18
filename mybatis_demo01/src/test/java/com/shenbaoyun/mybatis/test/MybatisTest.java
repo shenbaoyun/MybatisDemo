@@ -44,7 +44,6 @@ public class MybatisTest {
         System.out.println(user);
 */
         List<User> user = mapper.getUser();
-        System.out.println(user);
         user.forEach(user1 -> System.out.println(user1));
 
     }

@@ -3,21 +3,53 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <!--引入properties-->
+    <properties resource="jdbc.properties"/>
+    <!--
+    properties?,settings?,typeAliases?,typeHandlers?,objectFactory?,
+    objectWrapperFactory?,reflectorFactory?,plugins?,
+    environments?,databaseIdProvider?,mappers?
+    -->
+    <!--设置类型别名
+    aluas='User'可以省略
+    -->
+    <typeAliases>
+        <!--
+                <typeAlias type="com.shenbaoyun.mybatis.pojo.User"></typeAlias>
+        -->
+        <!--以包为单位将包下所有类型设置为默认的类型别名，且不区分大小写-->
+        <package name="com.shenbaoyun.mybatis.pojo"/>
+    </typeAliases>
+
     <!--设置连接数据库的环境-->
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
+            <!--
+            datesource：配置数据源
+            type：设置数据源的类型
+            type(POOLED/UNPOOLED/JNDI)
+            POOLED:表示使用数据库连接池缓存数据库连接
+            UNPOOLED：表示不使用数据库连接池缓存数据库连接
+            JNDI：表示使用上下文中的数据源
+            -->
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="driver" value="${jdbc.driver}"/>
                 <property name="url"
-                          value="jdbc:mysql://110.42.169.241:3306/MyBatis"/>
-                <property name="username" value="root"/>
-                <property name="password" value="SBY99@qfy"/>
+                          value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
             </dataSource>
         </environment>
     </environments>
     <!--引入映射文件-->
     <mappers>
-        <mapper resource="mappers/UserMapper.xml"/>
+        <!--
+        以包为单位引入映射文件
+        要求
+        1 mapper接口所在的包要喝映射文件所在的包一致
+        2 mapper接口要和映射文件名称一致
+        -->
+        <package name="com.shenbaoyun.mybatis.mapper"/>
     </mappers>
 </configuration>
