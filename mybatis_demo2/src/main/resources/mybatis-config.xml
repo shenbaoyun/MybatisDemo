@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <!--引入jdbc 文件-->
+    <properties resource="jdbc.properties"></properties>
+
+    <!--类型别名-->
+    <typeAliases>
+        <!--设置以包为单位，下面的所有类的别名，类名首字母小写-->
+        <package name="com.shenbaoyun.mybatis.pojo"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+
+    </environments>
+
+    <!--引入映射文件-->
+    <mappers>
+        <!--以包为单位-->
+        <package name="com.shenbaoyun.mybatis.mapper"/>
+        <!--以文件为单位-->
+
+    </mappers>
+</configuration>
