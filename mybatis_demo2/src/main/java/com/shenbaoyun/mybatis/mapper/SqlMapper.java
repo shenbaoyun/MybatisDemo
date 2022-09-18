@@ -11,6 +11,11 @@ import java.util.List;
  */
 public interface SqlMapper {
     /**
+     * 添加用户信息
+     */
+    void insertUser(User user);
+
+    /**
      * 查询指定表中的数据
      */
     List<User> getUserByTableName(@Param("tablename") String tablename);
