@@ -1,10 +1,12 @@
 package com.shenbaoyun.mybatis.pojo;
 
+import java.io.Serializable;
+
 /**
  * @author shenbaoyun
  * @create 2022-09-18 14:04
  */
-public class Emp {
+public class Emp implements Serializable {
 
     private Integer eid;
     private String empName;

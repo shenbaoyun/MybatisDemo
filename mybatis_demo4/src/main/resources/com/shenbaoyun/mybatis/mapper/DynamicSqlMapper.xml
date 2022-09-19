@@ -4,6 +4,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shenbaoyun.mybatis.mapper.DynamicSqlMapper">
+    <!--int insertMoreByList(List<Emp> emps);-->
+    <insert id="insertMoreByList">
+        insert into t_emp values
+        <foreach collection="emps" item="emp" separator=",">
+            (null ,#{emp.empName},#{emp.age},#{emp.sex},#{emp.email},null)
+        </foreach>
+    </insert>
+    <!--int deleteMoreByArray( Integer[] eids);-->
+    <delete id="deleteMoreByArray">
+        delete from t_emp where
+        <foreach collection="eids" item="eid" separator="or">
+            eid=#{eid}
+        </foreach>
+    </delete>
+
+    <!--int deleteMoreByArray( Integer[] eids);-->
+    <delete id="deleteMoreByArrayOne">
+        delete from t_emp where eid in
+        <foreach collection="eids" item="eid" separator="," open="(" close=")">
+            #{eid}
+        </foreach>
+    </delete>
 
 
     <!--List<Emp> getEmpByChoose(Emp emp);-->
@@ -31,9 +53,11 @@
     </select>
 
 
+
+    <sql id="empColumns">eid,emp_name,age,sex,email</sql>
     <!--List<Emp>  getEmpByCondition(Emp emp);-->
     <select id="getEmpByCondition" resultType="Emp">
-        select * from t_emp
+        select <include refid="empColumns"></include> from t_emp
         <trim prefix="where" suffixOverrides="and|or">
             <if test="empName != null and empName != ''">
                 emp_name = #{empName} and
